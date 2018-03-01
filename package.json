@@ -1,0 +1,16 @@
+{
+  "name": "js_integration_tests",
+  "version": "1.0.0",
+  "description": "js integrtion testing for QRL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^5.0.0",
+    "grpc": "^1.9.1",
+    "temp": "^0.8.3"
+  }
+}
