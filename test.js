@@ -184,3 +184,100 @@ describe('GetAddressState', function() {
     });
 
 });
+
+
+
+
+// Test for getStats
+describe('GetStats', function() {
+    let response;
+    // call API
+    before(function() {
+        return new Promise((resolve) => {
+            qrlClient.then( function (qrlClient) {
+                qrlClient.getStats({include_timeseries: true}, (err, res) => {
+                    if (err){
+                        console.log("Error: ", err.message);
+                        return;
+                    }
+                    response = res;
+                    // console.log(res);
+                    resolve();
+                });
+            });
+        });
+    });
+
+    it('GetStatsResp has NodeInfo *node_info* property', function(){
+        expect(response).to.have.property('node_info');
+    });
+    it('GetStatsResp.node_info has correct *version* property', function(){
+        expect(response.node_info).to.have.property('version');
+        expect(response.node_info.version).to.be.a('string');
+    });
+    it('GetStatsResp.node_info has correct *state* property', function(){
+        expect(response.node_info).to.have.property('state');
+        expect(response.node_info.state).to.be.a('string');
+        expect(response.node_info.state).to.be.oneOf(['UNKNOWN', 'UNSYNCED', 'SYNCING', 'SYNCED', 'FORKED']);
+    });
+    it('GetStatsResp.node_info has correct *num_connections* property', function(){
+        expect(response.node_info).to.have.property('num_connections');
+        expect(response.node_info.num_connections).to.be.a('number');
+    });
+    it('GetStatsResp.node_info has correct *num_known_peers* property', function(){
+        expect(response.node_info).to.have.property('num_known_peers');
+        expect(response.node_info.num_known_peers).to.be.a('number');
+    });
+    it('GetStatsResp.node_info has correct *uptime* property', function(){
+        expect(response.node_info).to.have.property('uptime');
+        expect(response.node_info.uptime).to.be.a('string');
+    });
+    it('GetStatsResp.node_info has correct *block_height* property', function(){
+        expect(response.node_info).to.have.property('block_height');
+        expect(response.node_info.block_height).to.be.a('string');
+    });
+    it('GetStatsResp.node_info has correct *block_last_hash* property', function(){
+        expect(response.node_info).to.have.property('block_last_hash');
+        // ADD MORE
+        expect(typeof(response.node_info.block_last_hash)).to.equal('object');
+    });
+    it('GetStatsResp.node_info has correct *network_id* property', function(){
+        expect(response.node_info).to.have.property('network_id');
+        expect(response.node_info.network_id).to.be.a('string');
+    });
+
+    it('GetStatsResp has correct *epoch* property', function(){
+        expect(response).to.have.property('epoch');
+        expect(response.epoch).to.be.a('string');
+    });
+    it('GetStatsResp has correct *uptime_network* property', function(){
+        expect(response).to.have.property('uptime_network');
+        expect(response.uptime_network).to.be.a('string');
+    });
+
+    it('GetStatsResp has correct *block_last_reward* property', function(){
+        expect(response).to.have.property('block_last_reward');
+        expect(response.block_last_reward).to.be.a('string');
+    });
+    it('GetStatsResp has correct *block_time_mean* property', function(){
+        expect(response).to.have.property('block_time_mean');
+        expect(response.block_time_mean).to.be.a('string');
+    });
+    it('GetStatsResp has correct *block_time_sd* property', function(){
+        expect(response).to.have.property('block_time_sd');
+        expect(response.block_time_sd).to.be.a('string');
+    });
+    it('GetStatsResp has correct *coins_total_supply* property', function(){
+        expect(response).to.have.property('coins_total_supply');
+        expect(response.coins_total_supply).to.be.a('string');
+    });
+    it('GetStatsResp has correct *coins_emitted* property', function(){
+        expect(response).to.have.property('coins_emitted');
+        expect(response.coins_emitted).to.be.a('string');
+    });
+    it('GetStatsResp has correct *block_timeseries* property', function(){
+        expect(response).to.have.property('block_timeseries');
+        // expect(response.node_info.network_id).to.be.a('string');
+    });
+
+});
