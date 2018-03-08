@@ -7,7 +7,7 @@ var assert = require('assert');
 var expect = require('chai').expect
 
 async function fetchRemoteProto(nodeAddr) {
-    let protoDescriptor = grpc.load('/Users/abilican/Desktop/QRL/qrl/protos/qrlbase.proto');
+    let protoDescriptor = grpc.load('qrlbase.proto');
     let client = new protoDescriptor.qrl.Base(nodeAddr, grpc.credentials.createInsecure());
 
     return new Promise( (resolve) => {
@@ -184,8 +184,6 @@ describe('GetAddressState', function() {
     });
 
 });
-
-
 
 
 // Test for getStats
